@@ -1,0 +1,19 @@
+# Define the website or IP address to scan
+$target = "52.60.226.219"
+
+# Define the range of ports to scan
+$startPort = 1
+$endPort = 1024
+
+# Loop through each port in the range and test the connection
+foreach ($port in $startPort..$endPort) {
+    # Perform the scan
+    $connectionResult = Test-NetConnection -ComputerName $target -Port $port -WarningAction SilentlyContinue
+    
+    # Display the results if the port is open
+    if ($connectionResult.TcpTestSucceeded) {
+        Write-Output "Port $port is open on $target."
+    }
+}
+
+
